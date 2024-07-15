@@ -1,11 +1,35 @@
-function getShippingMessage(country, price, deliveryFee) {
-  const result = `Shipping to ${country} will cost ${
-    price + deliveryFee
-  } credits`;
-  return result;
+class Storage {
+  #items;
+
+  constructor(data) {
+    this.#items = data;
+  }
+   getItems() {
+      return this.#items;
+   }
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    if (this.#items.indexOf(itemToRemove) > 0) {
+      this.#items.splice(this.#items.indexOf(itemToRemove), 1);
+    }
+    
+   }
 }
 
-console.log(getShippingMessage('Australia', 120, 50));
-console.log(getShippingMessage('Germany', 80, 20));
-console.log(getShippingMessage('Sweden', 100, 20));
-console.log(getShippingMessage('The USA', 500, 55));
+
+
+
+
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
